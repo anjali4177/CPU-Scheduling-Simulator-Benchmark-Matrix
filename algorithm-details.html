@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Technical Documentation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+    .doc-container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #ff477e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero-banner {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+    .algo-tag {
+      background: #ff477e;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .doc-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 24px;
+      border: 1px solid #e2e8f0;
+    }
+    h2, h3, h4 {
+      color: #0f172a;
+      margin-top: 0;
+    }
+    .formula-box {
+      background: #f1f5f9;
+      border-left: 4px solid #3b82f6;
+      padding: 16px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.95rem;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+    .gantt-demo {
+      display: flex;
+      border: 2px solid #0f172a;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px 0 10px 0;
+    }
+    .gantt-block {
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+    .pros-cons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .pro-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .con-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-container">
+    <a href="index.html" class="back-link">← Back to Main Simulator</a>
+
+    <div class="hero-banner">
+      <span class="algo-tag" id="docType">PREEMPTIVE / NON-PREEMPTIVE</span>
+      <h1 id="docTitle" style="margin: 0 0 10px 0;">Algorithm Title</h1>
+      <p id="docDesc" style="margin: 0; color: #94a3b8; font-size: 1.05rem;">Algorithm description summary...</p>
+    </div>
+
+    <!-- Overview Section -->
+    <div class="doc-card">
+      <h3>📌 Overview & Technical Concept</h3>
+      <p id="docOverview">Detailed concept explanation...</p>
+    </div>
+
+    <!-- Core Formulas Section -->
+    <div class="doc-card">
+      <h3>📐 Mathematical Formulas</h3>
+      <div class="formula-box" id="docFormula">
+        Turnaround Time (TAT) = Completion Time - Arrival Time<br>
+        Waiting Time (WT) = Turnaround Time - Burst Time
+      </div>
+    </div>
+
+    <!-- Numerical Example & Gantt Visual -->
+    <div class="doc-card">
+      <h3>📊 Step-by-Step Numerical Example & Gantt Representation</h3>
+      <p id="docExampleDesc">Example task set evaluation:</p>
+      
+      <div id="docGantt" class="gantt-demo"></div>
+      
+      <div id="docExampleTable"></div>
+    </div>
+
+    <!-- Characteristics & Trade-offs -->
+    <div class="doc-card">
+      <h3>⚖️ Advantages & Disadvantages</h3>
+      <div class="pros-cons-grid">
+        <div class="pro-box">
+          <h4 style="color: #166534; margin-bottom: 8px;">Advantages</h4>
+          <ul id="docPros" style="padding-left: 20px; margin: 0; color: #15803d;"></ul>
+        </div>
+        <div class="con-box">
+          <h4 style="color: #991b1b; margin-bottom: 8px;">Disadvantages</h4>
+          <ul id="docCons" style="padding-left: 20px; margin: 0; color: #b91c1c;"></ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Database of complete GeeksforGeeks-style algorithm documentation
+    const algoData = {
+      fcfs: {
+        title: "First-Come, First-Served (FCFS) Scheduling",
+        type: "Non-Preemptive",
+        desc: "Executes ready processes strictly in order of their arrival time in the ready queue.",
+        overview: "First-Come, First-Served (FCFS) is the simplest CPU scheduling algorithm. The process that requests the CPU first is allocated the CPU first. Managed using a FIFO queue, incoming processes append to the tail of the queue. FCFS is non-preemptive, meaning once a process gains CPU control, it holds it until termination or I/O request.",
+        formula: "Completion Time (CT) = Start Time + Burst Time\nTurnaround Time (TAT) = CT - Arrival Time (AT)\nWaiting Time (WT) = TAT - Burst Time (BT)",
+        gantt: [
+          { name: "P1", width: "30%", bg: "#3b82f6" },
+          { name: "P2", width: "20%", bg: "#10b981" },
+          { name: "P3", width: "50%", bg: "#f59e0b" }
+        ],
+        exampleTable: `
+          <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+            <thead><tr style="background:#f1f5f9; text-align:left;"><th style="padding:8px;">Process</th><th style="padding:8px;">AT</th><th style="padding:8px;">BT</th><th style="padding:8px;">CT</th><th style="padding:8px;">TAT</th><th style="padding:8px;">WT</th></tr></thead>
+            <tbody>
+              <tr><td style="padding:8px;">P1</td><td>0</td><td>24</td><td>24</td><td>24</td><td>0</td></tr>
+              <tr><td style="padding:8px;">P2</td><td>0</td><td>3</td><td>27</td><td>27</td><td>24</td></tr>
+              <tr><td style="padding:8px;">P3</td><td>0</td><td>3</td><td>30</td><td>30</td><td>27</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px;"><strong>Average TAT:</strong> 27.00 ticks | <strong>Average WT:</strong> 17.00 ticks</p>
+        `,
+        pros: ["Simple to understand and implement.", "Requires minimal overhead as no complex queues are maintained."],
+        cons: ["Suffers from the Convoy Effect (short processes wait for long ones).", "High average waiting time."]
+      },
+      sjf: {
+        title: "Shortest Job First (SJF) Scheduling",
+        type: "Non-Preemptive",
+        desc: "Selects the process with the smallest execution burst duration from the ready queue.",
+        overview: "Shortest Job First associates with each process the length of its next CPU burst. When the CPU becomes available, it is assigned to the process that has the smallest CPU burst. If two processes have the same burst time, FCFS scheduling is used to break the tie.",
+        formula: "Min(Burst Time) selected at current tick\nTAT = Completion Time - Arrival Time\nWT = TAT - Burst Time",
+        gantt: [
+          { name: "P4 (BT: 3)", width: "20%", bg: "#10b981" },
+          { name: "P1 (BT: 6)", width: "30%", bg: "#3b82f6" },
+          { name: "P2 (BT: 8)", width: "50%", bg: "#8b5cf6" }
+        ],
+        exampleTable: `
+          <p>Minimum Average Waiting Time algorithm among non-preemptive strategies.</p>
+        `,
+        pros: ["Gives minimum average waiting time for a given set of processes.", "Optimal throughput for batch processing."],
+        cons: ["Cannot be implemented in interactive systems (burst times are unknown beforehand).", "Risk of job starvation for long processes."]
+      },
+      srtf: {
+        title: "Shortest Remaining Time First (SRTF)",
+        type: "Preemptive SJF",
+        desc: "Preempts the currently executing task if a newly arrived task has a shorter remaining burst duration.",
+        overview: "SRTF is the preemptive version of SJF. The execution of a process can be preempted if a new process arrives with a shorter remaining CPU burst duration than the process currently executing.",
+        formula: "At each tick t: Select Process with Min(Remaining BT)\nWT = Completion Time - Arrival Time - Total Burst Time",
+        gantt: [
+          { name: "P1", width: "10%", bg: "#3b82f6" },
+          { name: "P2", width: "40%", bg: "#ef4444" },
+          { name: "P1", width: "50%", bg: "#3b82f6" }
+        ],
+        exampleTable: "<p>Executes preemptive context switches whenever shorter remaining jobs enter the queue.</p>",
+        pros: ["Provides low average waiting time.", "Responds quickly to short tasks."],
+        cons: ["High context-switching overhead.", "Possibility of starvation for long processes."]
+      },
+      rr: {
+        title: "Round Robin (RR) Scheduling",
+        type: "Preemptive (Time Slice)",
+        desc: "Allocates fixed time quanta to processes in a circular queue to maximize responsiveness.",
+        overview: "Round Robin is designed especially for time-sharing systems. It is similar to FCFS scheduling, but preemption is added to enable the system to switch between processes. A small unit of time, called a time quantum or time slice, is defined.",
+        formula: "Execution Time = Min(Remaining Burst, Time Quantum)\nContext Switch Triggered when Time Slice Expires",
+        gantt: [
+          { name: "P1 (Q=2)", width: "25%", bg: "#3b82f6" },
+          { name: "P2 (Q=2)", width: "25%", bg: "#10b981" },
+          { name: "P3 (Q=2)", width: "25%", bg: "#f59e0b" },
+          { name: "P1 (Q=1)", width: "25%", bg: "#3b82f6" }
+        ],
+        exampleTable: "<p>Uses a fixed time quantum (e.g., 2 ticks) to cycle through active ready processes.</p>",
+        pros: ["Fair allocation of CPU among all processes.", "Prevents starvation and offers excellent response time."],
+        cons: ["High context switching overhead if quantum is too small.", "Degenerates to FCFS if quantum is excessively large."]
+      },
+      priority: {
+        title: "Priority Scheduling",
+        type: "Priority-Based",
+        desc: "Allocates processor cycles according to explicit process priority ranks.",
+        overview: "A priority rank is associated with each process, and the CPU is allocated to the process with the highest priority (smaller integer usually signifies higher priority). Equal-priority processes are scheduled in FCFS order.",
+        formula: "Order = Ascending / Descending Priority Rank\nWT = Start Time - Arrival Time",
+        gantt: [
+          { name: "P3 (Priority 1)", width: "40%", bg: "#8b5cf6" },
+          { name: "P1 (Priority 2)", width: "30%", bg: "#3b82f6" },
+          { name: "P2 (Priority 3)", width: "30%", bg: "#ec4899" }
+        ],
+        exampleTable: "<p>Processes execute according to priority rank hierarchy.</p>",
+        pros: ["Allows execution based on critical system importance."],
+        cons: ["Indefinite blocking / Starvation of low-priority processes (mitigated via Aging)."]
+      },
+      hrrn: {
+        title: "Highest Response Ratio Next (HRRN)",
+        type: "Dynamic Priority",
+        desc: "Calculates dynamic priority ratios using waiting time to prevent process starvation.",
+        overview: "HRRN is a non-preemptive algorithm that calculates the Response Ratio for each ready process whenever the CPU is free. It selects the task with the highest Response Ratio.",
+        formula: "Response Ratio (RR) = (Waiting Time + Burst Time) / Burst Time\nRR = 1 + (Waiting Time / Burst Time)",
+        gantt: [
+          { name: "P1", width: "30%", bg: "#3b82f6" },
+          { name: "P2 (High RR)", width: "40%", bg: "#10b981" },
+          { name: "P3", width: "30%", bg: "#f59e0b" }
+        ],
+        exampleTable: "<p>Dynamic ratio increases as waiting time increases, preventing job starvation.</p>",
+        pros: ["Prevents job starvation automatically.", "Favors shorter jobs while gradually elevating longer waiting tasks."],
+        cons: ["CPU burst times must be estimated in advance."]
+      }
+    };
+
+    // Load URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const algoKey = urlParams.get('algo') || 'fcfs';
+    const data = algoData[algoKey] || algoData['fcfs'];
+
+    // Render content
+    document.getElementById('docTitle').innerText = data.title;
+    document.getElementById('docType').innerText = data.type;
+    document.getElementById('docDesc').innerText = data.desc;
+    document.getElementById('docOverview').innerText = data.overview;
+    document.getElementById('docFormula').innerText = data.formula;
+    document.getElementById('docExampleTable').innerHTML = data.exampleTable;
+
+    // Render Gantt
+    const ganttContainer = document.getElementById('docGantt');
+    ganttContainer.innerHTML = '';
+    data.gantt.forEach(block => {
+      const div = document.createElement('div');
+      div.className = 'gantt-block';
+      div.style.width = block.width;
+      div.style.backgroundColor = block.bg;
+      div.innerText = block.name;
+      ganttContainer.appendChild(div);
+    });
+
+    // Render Pros & Cons
+    const prosList = document.getElementById('docPros');
+    prosList.innerHTML = data.pros.map(p => `<li>${p}</li>`).join('');
+
+    const consList = document.getElementById('docCons');
+    consList.innerHTML = data.cons.map(c => `<li>${c}</li>`).join('');
+  </script>
+
+</body>
+</html>

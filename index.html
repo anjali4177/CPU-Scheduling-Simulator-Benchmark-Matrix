@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumSched - CPU Process Scheduling Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Top Title Banner -->
+  <header class="top-header-banner" id="home">
+    <div class="banner-container">
+      <span class="os-badge">OS Workbench</span>
+      <h1>CPU Scheduling Simulator & Benchmark Matrix</h1>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      
+      <p class="hero-subtitle">
+        Explore, benchmark, and evaluate key operating system scheduling strategies—including 
+        <strong>FCFS, SJF, SRTF, Priority, HRRN, and Round Robin</strong>—backed by interactive 
+        execution timelines and detailed turnaround analysis.
+      </p>
+
+      <!-- Feature Pills -->
+      <div class="feature-pills">
+        <a href="#algorithms" class="pill">
+          <span class="pill-icon">📚</span>
+          <div>
+            <strong>Algorithm Hub</strong>
+            <small>Formulae & Theoretical Guide</small>
+          </div>
+        </a>
+        <a href="#simulator" class="pill">
+          <span class="pill-icon">⚙️</span>
+          <div>
+            <strong>Interactive Simulator</strong>
+            <small>Dispatch & Gantt Execution</small>
+          </div>
+        </a>
+       <!-- Feature Pills -->
+<div class="feature-pills">
+  
+
+ 
+    
+
+  <!-- UPDATED PILL: Multi-Algorithm Matrix -->
+  <a href="#algorithm-comparison" class="pill">
+    <span class="pill-icon">📊</span>
+    <div>
+      <strong>Benchmark Matrix</strong>
+      <small>Real-time Multi-Algo Metrics</small>
+    </div>
+  </a>
+
+  
+        <a href="#quiz" class="pill">
+          <span class="pill-icon">🎯</span>
+          <div>
+            <strong>OS Knowledge Quiz</strong>
+            <small>Standard MCQs & Scoring</small>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Main Canvas -->
+  <main class="main-container">
+
+    <!-- MOVED UP: Scheduling Algorithms Hub placed ABOVE Workload Configuration & Engine -->
+    <section class="card section-block algo-section-bg" id="algorithms" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <span class="card-icon">📚</span>
+        <h3>Scheduling Algorithms Hub (Click Card for Detailed Page)</h3>
+      </div>
+      
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          
+          <a href="algorithm-details.html?algo=fcfs" target="_blank" class="algo-card">
+            <span class="algo-tag">Non-Preemptive</span>
+            <h4>First-Come, First-Served (FCFS)</h4>
+            <p>Executes processes sequentially based on arrival ticks. Click to view formulas and execution diagrams ↗</p>
+          </a>
+
+          <a href="algorithm-details.html?algo=sjf" target="_blank" class="algo-card">
+            <span class="algo-tag">Non-Preemptive</span>
+            <h4>Shortest Job First (SJF)</h4>
+            <p>Prioritizes processes with minimum execution burst durations. Click to view formulas ↗</p>
+          </a>
+
+          <a href="algorithm-details.html?algo=srtf" target="_blank" class="algo-card">
+            <span class="algo-tag preemptive">Preemptive</span>
+            <h4>Shortest Remaining Time First (SRTF)</h4>
+            <p>Preempts running tasks when shorter burst jobs arrive. Click to view formulas ↗</p>
+          </a>
+
+          <a href="algorithm-details.html?algo=rr" target="_blank" class="algo-card">
+            <span class="algo-tag preemptive">Preemptive</span>
+            <h4>Round Robin (RR)</h4>
+            <p>Distributes CPU time evenly using fixed quantum slices. Click to view formulas ↗</p>
+          </a>
+
+          <a href="algorithm-details.html?algo=priority" target="_blank" class="algo-card">
+            <span class="algo-tag">Priority-Based</span>
+            <h4>Priority Scheduling</h4>
+            <p>Allocates processor cycles based on process priority level ranks. Click to view formulas ↗</p>
+          </a>
+
+          <a href="algorithm-details.html?algo=hrrn" target="_blank" class="algo-card">
+            <span class="algo-tag">Dynamic Priority</span>
+            <h4>Highest Response Ratio Next (HRRN)</h4>
+            <p>Calculates dynamic ratios using waiting time to prevent starvation. Click to view formulas ↗</p>
+          </a>
+
+          <!-- Duplicated for Infinite Smooth Scrolling -->
+          <a href="algorithm-details.html?algo=fcfs" target="_blank" class="algo-card">
+            <span class="algo-tag">Non-Preemptive</span>
+            <h4>First-Come, First-Served (FCFS)</h4>
+            <p>Executes processes sequentially based on arrival ticks. Click to view formulas ↗</p>
+          </a>
+          <a href="algorithm-details.html?algo=sjf" target="_blank" class="algo-card">
+            <span class="algo-tag">Non-Preemptive</span>
+            <h4>Shortest Job First (SJF)</h4>
+            <p>Prioritizes processes with minimum execution burst durations. Click to view formulas ↗</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Row 1: Process Controller + Active Ready Queue -->
+    <div class="workspace-grid top-grid" id="simulator">
+      
+      <!-- Panel 1: Process Setup & Configuration -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">⚙️</span>
+          <h3>Workload Configuration & Engine</h3>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Arrival Time</label>
+            <input type="number" id="atInput" value="0" min="0">
+          </div>
+          <div class="form-group">
+            <label>Burst Time</label>
+            <input type="number" id="btInput" value="5" min="1">
+          </div>
+          <div class="form-group">
+            <label>Priority Rank</label>
+            <input type="number" id="prInput" value="1" min="1">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="addProcess()">Enqueue New Task</button>
+
+        <div class="divider"></div>
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label>Algorithm To Apply..</label>
+            <select id="algoSelect">
+              <option value="fcfs">First Come First Serve (FCFS)</option>
+              <option value="sjf">Shortest Job First (SJF - Non-Preemptive)</option>
+              <option value="srtf">Shortest Remaining Time First (SRTF - Preemptive)</option>
+              <option value="rr">Round Robin (RR)</option>
+              <option value="priority_np">Priority Scheduling (Non-Preemptive)</option>
+              <option value="hrrn">Highest Response Ratio Next (HRRN)</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="quantumGroup" style="display:none;">
+            <label>Time Slice (Quantum)</label>
+            <input type="number" id="quantumInput" value="2" min="1">
+          </div>
+        </div>
+
+        <button class="btn btn-success" id="runBtn">Run Dispatcher</button>
+
+        <div class="divider"></div>
+
+       
+      </div>
+
+      <!-- Panel 2: Enqueued Workload Queue -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">📋</span>
+          <h3>Enqueued Task Registry</h3>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Process</th>
+                <th>Arrival Time</th>
+                <th>Burst Duration</th>
+                <th>Priority</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody id="processTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Timeline Breakdown & Benchmarks -->
+    <div class="workspace-grid bottom-grid">
+
+      <!-- Panel 3: Process Execution Timeline -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">📈</span>
+          <h3>Processor Dispatch Timeline</h3>
+        </div>
+        <div id="ganttChart" class="gantt-chart"></div>
+      </div>
+
+      <!-- Panel 4: System Performance Evaluation -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">🎯</span>
+          <h3>Performance Benchmark Summary</h3>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Task ID</th>
+                <th>Completion Tick (CT)</th>
+                <th>Turnaround (TAT)</th>
+                <th>Wait Duration (WT)</th>
+                <th>First Response (RT)</th>
+              </tr>
+            </thead>
+            <tbody id="metricsTableBody"></tbody>
+          </table>
+        </div>
+        <div id="avgMetrics" class="metrics-summary"></div>
+      </div>
+
+    </div>
+
+    <!-- UNIQUE FEATURE: Multi-Algorithm Benchmark & Comparison Matrix -->
+<section class="card section-block" id="algorithm-comparison">
+  <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <span class="card-icon">📊</span>
+      <h3>Multi-Algorithm Execution & Performance Matrix</h3>
+    </div>
+    <button class="btn btn-primary" onclick="runAllAlgorithmsComparison()" style="width: auto; padding: 8px 18px; font-size: 0.9rem;">
+      ⚡ Benchmark All Algorithms
+    </button>
+  </div>
+  
+  <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 6px; margin-bottom: 16px;">
+    Compare how FCFS, SJF, SRTF, RR, Priority, and HRRN perform on your exact current task queue in real-time.
+  </p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Algorithm Strategy</th>
+          <th>Avg Turnaround Time (TAT)</th>
+          <th>Avg Waiting Time (WT)</th>
+          <th>CPU Utilization</th>
+          <th>Efficiency Status</th>
+        </tr>
+      </thead>
+      <tbody id="comparisonTableBody">
+        <tr>
+          <td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 20px;">
+            Click <strong>"Benchmark All Algorithms"</strong> above to compare performance metrics across all scheduling strategies.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+    <!-- OS Standard Interactive Quiz -->
+    <section class="card section-block" id="quiz">
+      <div class="card-header">
+        <span class="card-icon">🧠</span>
+        <h3>OS CPU Scheduling Standard Quiz</h3>
+      </div>
+      <div class="quiz-box">
+        <div class="quiz-score-header">
+          <span>Score: <strong id="scoreDisplay">0</strong> / <span id="totalQuestionsDisplay">3</span></span>
+          <span class="badge-level">Intermediate OS Level</span>
+        </div>
+        
+        <div id="quizContainer">
+          <h4 id="questionText" class="question-title">Loading Question...</h4>
+          <div id="optionsGroup" class="options-group"></div>
+          <button id="nextQuestionBtn" class="btn btn-primary" onclick="nextQuestion()" style="margin-top: 16px; display: none;">Next Question ➔</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-container">
+     
+      <a href="#algorithms" class="nav-item">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label">Algorithms</span>
+      </a>
+      <a href="#simulator" class="nav-item">
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">Simulator</span>
+      </a>
+  
+      <a href="#quiz" class="nav-item">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-label">Quiz</span>
+      </a>
+      <a href="#algorithm-comparison" class="nav-item">
+  <span class="nav-icon">📊</span>
+  <span class="nav-label">Matrix</span>
+</a>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/scheduler.js"></script>
+  
+  <script src="js/gantt.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/features.js"></script>
+</body>
+</html>
